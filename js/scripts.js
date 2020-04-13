@@ -27,14 +27,24 @@ function categorizeLiberal(values){
 }
 
 $(document).ready(function(){
-  var values = [];
+
+  
   $("form").submit(function(e){
+    var values = [];
+    validate();
     e.preventDefault();
     $("select").each(function(item){
       values.push($(this).val());
     }) 
     var rating = categorizeLiberal(values);
     $(".rating").text("According to my scientific calculations you are " + rating + "." )
+    function validate(){
+      $("select").each(function(){
+        if ($(this).val==="Select"){
+          $(this).closest("div").AddClass("has-warning");
+        }
+      });
+    };
   });
   
 });
