@@ -28,7 +28,6 @@ function categorizeLiberal(values){
 
 $(document).ready(function(){
 
-  
   $("form").submit(function(e){
     e.preventDefault();
     var values = [];
@@ -42,10 +41,13 @@ $(document).ready(function(){
     }) 
     var rating = categorizeLiberal(values);
     $(".rating").text("According to my scientific calculations you are " + rating + "." )
+    
+    
     function validate(){
+      var isValidated = true;
       $("select").each(function(){
         if ($(this).val()==="Select"){
-          var isValidated = false;
+          isValidated = false;
           $(this).closest("div").addClass("has-error");
           $(this).closest("div").append("<span class='help-block'>Please select an answer.</span>");
         }
