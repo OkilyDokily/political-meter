@@ -30,9 +30,13 @@ $(document).ready(function(){
 
   
   $("form").submit(function(e){
-    var values = [];
-    validate();
     e.preventDefault();
+    var values = [];
+    hide();
+    if(!validate()){
+      return;
+    };
+    
     $("select").each(function(item){
       values.push($(this).val());
     }) 
@@ -40,11 +44,21 @@ $(document).ready(function(){
     $(".rating").text("According to my scientific calculations you are " + rating + "." )
     function validate(){
       $("select").each(function(){
-        if ($(this).val==="Select"){
-          $(this).closest("div").AddClass("has-warning");
+        if ($(this).val()==="Select"){
+          var isValidated = false;
+          $(this).closest("div").addClass("has-error");
+          $(this).closest("div").append("<span class='help-block'>Please select an answer.</span>");
         }
       });
+      return isValidated;
     };
+
+    function hide(){
+      $("select").each(function(){
+          $("div.has-error").removeClass("has-error");
+          $("span.help-block").remove();
+      });
+    }
   });
   
 });
